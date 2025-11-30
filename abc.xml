@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <?xml-stylesheet type="text/xsl" href="/style.xsl"?>
+
+<personname>
+  <user id="1">
+    <name>ram</name>
+    <age>23</age>
+    <number>8998238</number>
+  </user>
+
+  <user id="2">
+    <name>ramu</name>
+    <age>24</age>
+    <number>893298</number>
+  </user>
+</personname>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Continuous Slider</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: #f0f0f0;
+      overflow: hidden;
+    }
+
+    .slider {
+      width: 80%;
+      height: 300px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .slider-track {
+      display: flex;
+      width: calc(300px * 10); /* Adjust according to image count */
+      animation: scroll 20s linear infinite;
+    }
+
+    .slide {
+      flex: 0 0 300px;
+      height: 100%;
+      position: relative;
+      transition: transform 0.5s, opacity 0.5s;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+
+    /* Center scaling & fading effect */
+    .slider-track:hover {
+      animation-play-state: paused; /* Pause on hover */
+    }
+
+    .slide:nth-child(3) {
+      transform: scale(1.4);
+      opacity: 1;
+      z-index: 2;
+    }
+
+    .slide:not(:nth-child(3)) {
+      opacity: 0.5;
+      transform: scale(0.7);
+    }
+
+    @keyframes scroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-1500px); } /* total width half of track */
+    }
+  </style>
+</head>
+<body>
+
+  <div class="slider">
+    <div class="slider-track">
+      <div class="slide"><img src="darsh-nishar-jj4iWf9L23w-unsplash.jpg"></div>
+      <div class="slide"><img src="dmitrii-shirnin-dBPTKi-j6kw-unsplash.jpg"></div>
+      <div class="slide"><img src="darsh-nishar-jj4iWf9L23w-unsplash.jpg"></div>
+      <div class="slide"><img src="dmitrii-shirnin-dBPTKi-j6kw-unsplash.jpg"></div>
+      <div class="slide"><img src="darsh-nishar-jj4iWf9L23w-unsplash.jpg"></div>
+      <!-- duplicate for seamless loop -->
+      <div class="slide"><img src="darsh-nishar-jj4iWf9L23w-unsplash.jpg"></div>
+      <div class="slide"><img src="dmitrii-shirnin-dBPTKi-j6kw-unsplash.jpg"></div>
+      <div class="slide"><img src="darsh-nishar-jj4iWf9L23w-unsplash.jpg"></div>
+      <div class="slide"><img src="dmitrii-shirnin-dBPTKi-j6kw-unsplash.jpg"></div>
+      <div class="slide"><img src="darsh-nishar-jj4iWf9L23w-unsplash.jpg"></div>
+    </div>
+  </div>
+
+</body>
+</html>

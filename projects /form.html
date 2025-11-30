@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+</head>
+<body>
+    <h2>User Registration Form</h2>
+    <form action="/action=php">
+ <input type="text"placeholder="Username">
+<input type="text"placeholder="Password"></form>
+<!--using label on touching text the cicle will be selected-->
+<!-- <label for ="id1">
+    <input type="radio"value="class X"name="class"id="id1">class X
+</label>
+    <label for="id2">
+    <input type="radio"value="class XI"name="class"id="id2">class XI
+</label> -->
+<!---but when we do not use label then text is not touchable -->
+<!-- <input type="radio"value="class X"name="class"id="id1">class X
+<input type="radio"value="class XI"name="class"id="id2">class XI -->
+<!-- as div take whole width so for getting class xi in other line we can use div -->
+<div id="id1"class="grp1">
+    <label>
+        <input type="radio"value="class X"name="class"id="id1">class X
+    </label>
+</div>
+<div id="id2"class="grp2">
+    <label >
+        <input type="radio"value="class XI"name="class"id="id2">class XI
+    </label>
+</div>
+<!-- for checkbox when you have multiple options -->
+<label for ="id1">
+    <input type="checkbox"value="class X"name="class"id="id1">class X
+</label><br>
+    <label for="id2">
+    <input type="checkbox"value="class XI"name="class"id="id2">class XI
+</label><br>
+<!-- for textarea -->
+ <textarea name="feedback"id="id1"placeholder="please give your valuable opinion here">feedback</textarea><br>
+<!-- for selecting one option -->
+ <select name="City"id="City">
+    <option value="Delhi">Delhi</option>
+    <option value="Mumbai">Mumbai</option>
+    <option value="Bangalore">Bangalore</option>
+ </select><br>
+ <input type="button"value="submit">
+</body>
+</html>

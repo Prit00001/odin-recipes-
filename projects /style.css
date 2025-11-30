@@ -1,0 +1,30 @@
+
+ul{
+    background-color: pink;
+    align-content:flex-end;
+    display: flex;
+    justify-content: space-evenly;
+}
+a{
+    text-decoration: none;
+}
+li{
+    background-color: white;
+    list-style: none;
+    display: inline;
+}
+/* for one box inside other */
+.outer{
+    height: 200px;
+ width: 200px;
+ background-color: antiquewhite;
+ display: flex;
+ justify-content: center;
+ align-items: center;
+}
+.inner{
+    height: 100px;
+    width: 100px;
+    background-color:black;
+
+}

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Binary Calculator</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="calculator">
+    <h2>Binary Calculator</h2>
+    <input type="text" id="display" readonly>
+
+    <div class="buttons">
+      <button onclick="press('1')">1</button>
+      <button onclick="press('0')">0</button>
+      <button onclick="press('+')">+</button>
+      <button onclick="press('-')">-</button>
+      <button onclick="press('*')">*</button>
+      <button onclick="press('/')">/</button>
+      <button onclick="press('and')">AND</button>
+      <button onclick="press('or')">OR</button>
+      <button onclick="press('xor')">XOR</button>
+      <button onclick="press('not')">NOT</button>
+      <button onclick="calculate()">=</button>
+      <button onclick="clearDisplay()">C</button>
+    </div>
+
+    <div class="options">
+      <label><input type="radio" name="mode" value="binary" checked> Binary</label>
+      <label><input type="radio" name="mode" value="both"> Binary + Decimal</label>
+    </div>
+
+    <h3>History</h3>
+    <ul id="history"></ul>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

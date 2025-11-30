@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>C LOC Counter</title>
+</head>
+<body style="font-family: Arial, sans-serif; padding: 20px;">
+  <h2>C Code LOC Counter</h2>
+
+  <textarea id="codeInput" rows="15" cols="70" style="font-family: monospace; padding: 10px;">
+// Paste your C code here
+
+#include <stdio.h>
+
+int main() {
+    // This is a comment
+    printf("Hello, World!\\n");  // inline comment
+    return 0;
+}
+
+/* block comment
+   continues here */
+  </textarea>
+  <br><br>
+
+  <button onclick="calculateLOC()" style="padding: 8px 16px; font-size: 16px;">Count LOC</button>
+
+  <h3>Result:</h3>
+  <pre id="result" style="background: #f4f4f4; padding: 10px; border-radius: 5px;"></pre>
+
+  <script>
+    function calculateLOC() {
+      const code = document.getElementById("codeInput").value;
+      const lines = code.split(/\r?\n/);
+
+      let total = 0, blank = 0, comment = 0, codeLines = 0;
+      let inBlockComment = false;
+
+      for (let raw of lines) {
+        total++;
+        let line = raw.trim();
+
+        if (line === "") {
+          blank++;
+          continue;
+        }
+
+        // Inside block comment
+        if (inBlockComment) {
+          comment++;
+          if (line.includes("*/")) {
+            inBlockComment = false;
+          }
+          continue;
+        }
+
+        // Block comment start
+        if (line.startsWith("/*")) {
+          comment++;
+          if (!line.includes("*/")) {
+            inBlockComment = true;
+          }
+          continue;
+        }
+
+        // Single-line comment (C99 style)
+        if (line.startsWith("//")) {
+          comment++;
+          continue;
+        }
+
+        // Code + inline comment
+        if (line.includes("//")) {
+          codeLines++;
+          continue;
+        }
+
+        // Normal code line
+        codeLines++;
+      }
+
+      document.getElementById("result").textContent =
+        `Total lines   : ${total}\n` +
+        `Blank lines   : ${blank}\n` +
+        `Comment lines : ${comment}\n` +
+        `Code lines    : ${codeLines}`;
+    }
+  </script>
+</body>
+</html>

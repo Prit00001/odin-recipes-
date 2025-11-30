@@ -1,0 +1,43 @@
+clc; 
+clear; 
+close all;
+
+T=2*pi;
+N=5;
+t = linspace(-pi,pi,1000);
+dt = t(2)-t(1);
+x(t>=0) = 1;
+x(t<0) = -1;
+
+a0 = (2/T)*sum(x)*dt;
+disp(a0);
+
+an=zeros(1,N);
+bn = zeros(1,N);
+
+for n = 1:N
+      an(n) = (2/T)*sum(x.*cos(n*t))*dt;
+      bn(n) = (2/T)*sum(x.sin(n*t))*dt;
+end 
+
+disp("Fourier coefficient of square wave:");
+fprintf('a0=%4.2f  \n',a0);
+disp(' n    an        bn');
+for n=1:N 
+fprintf('%.2f  %12.2f  %12.2f \n',n,an(n),bn(n));
+end 
+for n=1:N
+     x_t = x_t + an(n)*cos(n*t) + bn(n)*sin(n*t);
+     end
+
+     figure:
+    plot(t,x);
+    hold on:
+plot(t,x_t);
+xlabel('time');
+ylabel('x(t)');
+
+legend('Original Waveform','Estimated Waveform');
+
+
+     

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Binary Calculator</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background: #f1f5fb;
+    text-align: center;
+    padding-top: 50px;
+  }
+  .calc-box {
+    background: #fff;
+    display: inline-block;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  }
+  #display {
+    width: 320px;
+    padding: 12px;
+    font-size: 18px;
+    text-align: right;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+  }
+  .row { margin-top: 10px; }
+  button {
+    margin: 5px;
+    padding: 10px 15px;
+    font-size: 16px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    background: #e9edf5;
+  }
+  button:hover { background: #d4e0f0; }
+  .equal { background: #28a745; color: #fff; }
+  .reset { background: #dc3545; color: #fff; }
+  #decimalLine { margin-top: 12px; font-weight: bold; }
+  #err { color: #b00020; margin-top: 8px; }
+</style>
+</head>
+<body>
+  <div class="calc-box">
+    <h3>Binary Calculator</h3>
+    <input id="display" type="text" placeholder="Enter binary expression" readonly>
+
+    <div class="row">
+      <button onclick="append('0')">0</button>
+      <button onclick="append('1')">1</button>
+      <button onclick="append('+')">+</button>
+      <button onclick="append('-')">-</button>
+      <button onclick="append('*')">*</button>
+      <button onclick="append('/')">/</button>
+    </div>
+
+    <div class="row">
+      <button onclick="append('&')">&amp;</button>
+      <button onclick="append('|')">|</button>
+      <button onclick="append('^')">^</button>
+      <button onclick="append('&&')">&&</button>
+      <button onclick="append('||')">||</button>
+      <button onclick="append('!')">!</button>
+    </div>
+
+    <div class="row">
+      <button class="equal" onclick="calculate()">=</button>
+      <button class="reset" onclick="resetCalc()">Reset</button>
+    </div>
+
+    <div id="decimalLine">Decimal Result: --</div>
+    <div id="err"></div>
+  </div>
+
+<script>
+// Append text to display
+function append(value) {
+  const display = document.getElementById('display');
+  if (display.value === "" && value !== '!' && /[+\-*/&|^]|&&|\|\|/.test(value)) return;
+  display.value += value;
+  clearError();
+}
+
+// Reset calculator
+function resetCalc() {
+  document.getElementById('display').value = '';
+  document.getElementById('decimalLine').textContent = 'Decimal Result: --';
+  clearError();
+}
+
+// Error handling
+function showError(msg) { document.getElementById('err').textContent = msg; }
+function clearError() { document.getElementById('err').textContent = ''; }
+
+// Core operations
+function add(a,b){ return a + b; }
+function sub(a,b){ return a - b; }
+function mul(a,b){ return a * b; }
+function div(a,b){ return Math.floor(a / b); }
+function and(a,b){ return a & b; }
+function or(a,b){ return a | b; }
+function xor(a,b){ return a ^ b; }
+function land(a,b){ return (a && b) ? 1 : 0; }
+function lor(a,b){ return (a || b) ? 1 : 0; }
+function lnot(a){ return a ? 0 : 1; }
+
+// Find operator
+function findOperator(expr) {
+  if (expr.startsWith('!')) return {op:'!', idx:0};
+  if (expr.includes('&&')) return {op:'&&', idx: expr.indexOf('&&')};
+  if (expr.includes('||')) return {op:'||', idx: expr.indexOf('||')};
+  for (let op of ['+','-','*','/','&','|','^']) {
+    let idx = expr.indexOf(op);
+    if (idx !== -1) return {op, idx};
+  }
+  return null;
+}
+
+// Calculate function
+function calculate() {
+  clearError();
+  const display = document.getElementById('display');
+  const expr = display.value.trim();
+  if (!expr) { showError("Enter an expression!"); return; }
+
+  // Handle NOT (!)
+  if (expr.startsWith('!')) {
+    const val = expr.slice(1);
+    if (!/^[01]+$/.test(val)) { showError("Invalid binary after !"); return; }
+    const res = lnot(parseInt(val,2));
+    display.value = res.toString(2);
+    document.getElementById('decimalLine').textContent = "Decimal Result: " + res;
+    return;
+  }
+
+  const found = findOperator(expr);
+  if (!found) { showError("No operator found"); return; }
+
+  const op = found.op;
+  let [left, right] = expr.split(op);
+  if (!left || !right) { showError("Both operands required"); return; }
+  if (!/^[01]+$/.test(left) || !/^[01]+$/.test(right)) { showError("Use only 0s and 1s"); return; }
+
+  const a = parseInt(left, 2);
+  const b = parseInt(right, 2);
+  let resultDec;
+
+  switch(op) {
+    case '+': resultDec = add(a,b); break;
+    case '-': resultDec = sub(a,b); break;
+    case '*': resultDec = mul(a,b); break;
+    case '/': if (b===0) return showError("Cannot divide by zero"); resultDec = div(a,b); break;
+    case '&': resultDec = and(a,b); break;
+    case '|': resultDec = or(a,b); break;
+    case '^': resultDec = xor(a,b); break;
+    case '&&': resultDec = land(a,b); break;
+    case '||': resultDec = lor(a,b); break;
+    default: showError("Unknown operator"); return;
+  }
+
+  const binResult = (resultDec < 0 ? '-' : '') + Math.abs(resultDec).toString(2);
+  display.value = binResult;
+  document.getElementById('decimalLine').textContent = "Decimal Result: " + resultDec;
+}
+</script>
+</body>
+</html>

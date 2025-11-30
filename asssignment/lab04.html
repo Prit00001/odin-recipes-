@@ -1,0 +1,153 @@
+<!-- webAccessibilityTool.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Web Tech Lab</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&family=Lobster&family=Orbitron&display=swap" rel="stylesheet">
+
+  <style>
+    :root { --font-size: 16px; }
+
+    body {
+      font-size: var(--font-size);
+      font-family: Arial, sans-serif;
+      margin: 0;
+      transition: background 0.3s, color 0.3s, font-size 0.3s, filter 0.3s;
+      padding-bottom: 60px;
+    }
+
+    .top-left, .top-center, .top-right {
+      position: absolute;
+      display: flex;
+      gap: 10px;
+      padding: 10px;
+    }
+
+    .top-left { top: 0; left: 0; }
+    .top-center { top: 0; left: 50%; transform: translateX(-50%); }
+    .top-right { top: 0; right: 0; }
+
+    button {
+      padding: 10px;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .color-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: 4px;
+    }
+
+    .floating-btn {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      padding: 15px;
+      background-color: #333;
+      color: white;
+      text-align: center;
+      font-size: 18px;
+      cursor: pointer;
+    }
+
+    #tooltip {
+      position: absolute;
+      background: black;
+      color: white;
+      padding: 5px;
+      border-radius: 4px;
+      font-size: 12px;
+      display: none;
+    }
+
+    footer{
+        padding-bottom: 0%;
+    }
+  </style>
+</head>
+<body>
+
+
+<div class="top-left">
+  <button class="font-btn" data-font="Roboto">F1</button>
+  <button class="font-btn" data-font="Lobster">F2</button>
+  <button class="font-btn" data-font="Orbitron">F3</button>
+</div>
+
+
+<div class="top-center">
+  <button onclick="adjustFontSize(-5)">S</button>
+  <button onclick="adjustFontSize(5)">M</button>
+  <button onclick="adjustFontSize(10)">L</button>
+</div>
+
+
+<div class="top-right">
+  <button class="color-btn" style="background: red;" data-color="red"></button>
+  <button class="color-btn" style="background: green;" data-color="green"></button>
+  <button class="color-btn" style="background: blue;" data-color="blue"></button>
+</div>
+
+<div id="tooltip"></div>
+
+
+<div style="padding: 20px; align-content:center;">
+  <h1>Web Technology Lab</h1>
+  <p>This is a simple web accessibility tool with color, font, and text-to-speech support.</p>
+</div>
+
+<footer>
+<div class="floating-btn" onclick="readContent()">🔊 Read Page Content</div>
+</footer>
+</body>
+
+<script>
+  function getFontSize() {
+    return parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--font-size'));
+  }
+
+  function adjustFontSize(change) {
+    let size = getFontSize() + change;
+    if (size < 5) size = 5;
+    document.documentElement.style.setProperty('--font-size', size + 'px');
+  }
+
+
+  document.querySelectorAll('.color-btn').forEach(btn => {
+    const color = btn.dataset.color;
+    btn.onclick = () => {
+      document.body.style.background = color;
+      document.body.style.color = 'white';
+    };
+    btn.onmouseover = () => document.body.style.filter = 'invert(100%)';
+    btn.onmouseout = () => document.body.style.filter = 'invert(0%)';
+  });
+
+  const tooltip = document.getElementById('tooltip');
+  document.querySelectorAll('.font-btn').forEach(btn => {
+    const font = btn.dataset.font;
+    btn.onclick = () => document.body.style.fontFamily = `'${font}', sans-serif`;
+    btn.onmouseover = (e) => {
+      tooltip.innerText = font;
+      tooltip.style.display = 'block';
+      tooltip.style.left = e.pageX + 10 + 'px';
+      tooltip.style.top = e.pageY + 10 + 'px';
+    };
+    btn.onmouseout = () => tooltip.style.display = 'none';
+  });
+
+  function readContent() {
+    const text = document.body.innerText;
+    const speech = new SpeechSynthesisUtterance(text);
+    speech.lang = '';
+    window.speechSynthesis.speak(speech);
+  }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IIIT Manipur Timetable with Hover Info</title>
+</head>
+<body>
+
+<table border="1" cellspacing="0" cellpadding="10">
+  <tr>
+    <th>Day</th>
+    <th>Room</th>
+    <th>09:00 - 09:55</th>
+    <th>10:00 - 10:55</th>
+    <th>11:00 - 11:55</th>
+    <th>12:00 - 12:55</th>
+    <th>13:00 - 13:55</th>
+    <th>14:00 - 14:55</th>
+  </tr>
+
+  <tr>
+    <td>Monday</td>
+    <td>R-11</td>
+    <!-- CS2015 -->
+    <td bgcolor="#bfbebd" onmouseover="this.innerHTML='CS2015<br><small>Web Technology | Credit: 3+1 | Dr. Navanath Saharia</small>'; this.style.backgroundColor='#d1ecf1';" 
+        onmouseout="this.innerHTML='CS2015 <span style=\'color:red;\'>NS</span>'; this.style.backgroundColor='#bfbebd';">
+      CS2015 <span style="color:red;">NS</span>
+    </td>
+    <!-- CS2014 -->
+    <td bgcolor="#bfbebd" onmouseover="this.innerHTML='CS2014<br><small>Design and Analysis of Algorithms | Credit: 3 | Dr. Kh Motilal Singh</small>'; this.style.backgroundColor='#d1ecf1';" 
+        onmouseout="this.innerHTML='CS2014 <span style=\'color:red;\'>KMS</span>'; this.style.backgroundColor='#bfbebd';">
+      CS2014 <span style="color:red;">KMS</span>
+    </td>
+    <!-- MA2013 -->
+    <td bgcolor="#bfbebd" onmouseover="this.innerHTML='MA2013<br><small>Probability and Random Processes | Credit: 4 | Dr. Kamalesh Kumar</small>'; this.style.backgroundColor='#d1ecf1';" 
+        onmouseout="this.innerHTML='MA2013 <span style=\'color:red;\'>KK</span>'; this.style.backgroundColor='#bfbebd';">
+      MA2013 <span style="color:red;">KK</span>
+    </td>
+    <!-- LUNCH -->
+    <td bgcolor="#bfbebd" style="color: blue;"><b>LUNCH</b></td>
+    <!-- EC2131 -->
+    <td bgcolor="#bfbebd" colspan="2" onmouseover="this.innerHTML='EC2131<br><small>Signals and Systems Lab | Credit: 1 | Dr. Subasit Borah</small>'; this.style.backgroundColor='#d1ecf1';" 
+        onmouseout="this.innerHTML='EC2131 <span style=\'color:red;\'>SB,LAB</span>'; this.style.backgroundColor='#bfbebd';">
+      EC2131 <span style="color:red;">SB,LAB</span>
+    </td>
+  </tr>
+
+  <tr>
+    <td>Monday</td>
+    <td>R-10</td>
+    <!-- CS3061 -->
+    <td bgcolor="#bfbebd" onmouseover="this.innerHTML='CS3061<br><small>Computer Organization and Architecture | Credit: 3 | Dr. N Kishorjit Singh</small>'; this.style.backgroundColor='#d1ecf1';" 
+        onmouseout="this.innerHTML='CS3061 <span style=\'color:red;\'>NKS</span>'; this.style.backgroundColor='#bfbebd';">
+      CS3061 <span style="color:red;">NKS</span>
+    </td>
+    <!-- CS3044 -->
+    <td bgcolor="#bfbebd" onmouseover="this.innerHTML='CS3044<br><small>Compiler Design | Credit: 4 | Dr. R.K. Bidyalakshmi Devi</small>'; this.style.backgroundColor='#d1ecf1';" 
+        onmouseout="this.innerHTML='CS3044 <span style=\'color:red;\'>RKBD</span>'; this.style.backgroundColor='#bfbebd';">
+      CS3044 <span style="color:red;">RKBD</span>
+    </td>
+    <!-- CS3031 -->
+    <td bgcolor="#bfbebd" onmouseover="this.innerHTML='CS3031<br><small>Computer Networks | Credit: 4 | Dr. S. Chanu Inunganbi</small>'; this.style.backgroundColor='#d1ecf1';" 
+        onmouseout="this.innerHTML='CS3031 <span style=\'color:red;\'>SCI</span>'; this.style.backgroundColor='#bfbebd';">
+      CS3031 <span style="color:red;">SCI</span>
+    </td>
+    <!-- LUNCH -->
+    <td bgcolor="#bfbebd" style="color: blue;"><b>LUNCH</b></td>
+    <!-- Empty -->
+    <td colspan="2" bgcolor="#bfbebd"></td>
+  </tr>
+
+  <!-- Add more rows similarly -->
+
+</table>
+
+</body>
+</html>
+

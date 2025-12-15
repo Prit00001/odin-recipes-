@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Calculator </title>
+    <style>
+    body {
+  background: #101820;
+  color: #fff;
+  font-family: 'Poppins', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+#display {
+  width: 90%;
+  font-size: 1.4rem;
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 10px;
+  border: none;
+  text-align: right;
+  background: #000;
+  color: #0ff;
+}
+#buttons {
+display:grid;
+grid-template-columns: repeat(4,1fr);
+gap:12px;
+}
+button {
+  width: 60px;
+  height: 45px;
+  margin: 5px;
+  border: none;
+  border-radius: 10px;
+  background-color: #00bcd4;
+  color: white;
+  font-size: 1rem;
+  cursor:pointer;
+  transition: 0.2s;
+}
+
+button:hover {
+  background-color: #008c9e;
+}
+</style>
+</head>
+<body>
+    <div id="calculator"> <input type ="text" id="display">
+    <div id ="buttons">
+        <button onclick="press('0')">0</button>
+        <button onclick="press('1')">1</button>
+        <button onclick="press('2')">2</button>
+        <button onclick="press('3')">3</button>
+        <button onclick="press('4')">4</button>
+        <button onclick="press('5')">5</button>
+        <button onclick="press('6')">6</button>
+        <button onclick="press('7')">7</button>
+        <button onclick="press('8')">8</button>
+        <button onclick="press('9')">9</button>
+        <button onclick="press('+')">+</button>
+         <button onclick="press('-')">-</button>
+          <button onclick="press('*')">*</button>
+           <button onclick="press('/')">/</button>
+            <button onclick="calculate()">=</button>
+             <button onclick="clearDisplay()">C</button>
+    </div>
+    </div>
+    <script> let display=document.getElementById("display");
+let firstNumber="";
+let secondNumber="";
+let operator="";
+
+function press(value){
+    if(!isNaN(value)){
+        if(operator==""){
+            firstNumber += value;
+            display.value =firstNumber;
+        }else{
+            secondNumber+=value;
+            display.value=secondNumber;
+        }
+    }
+    else{
+        operator= value;
+    }
+    display.value=firstNumber+operator+secondNumber;
+}
+
+function calculate(){
+    let num1 =Number(firstNumber);
+    let num2 = Number(secondNumber);
+    
+let result="";
+
+    if(operator=="+"){result=num1+num2;}
+    else if(operator=="-"){result =num1-num2;}
+    else if(operator=="*"){ result =num1*num2;}
+    else if(operator=="/"){
+        if(num2==0){result ="Error";}
+            else{result=num1/num2;}
+    }
+    display.value=result;
+
+    firstNumber=result.toString();
+    secondNumber="";
+    operator="";
+}
+
+function clearDisplay(){
+    display.value="";
+    firstNumber="";
+    secondNumber="";
+    operator="";
+}</script>
+</body>
+</html>

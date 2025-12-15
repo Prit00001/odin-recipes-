@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>raj2</title>
+</head>
+<body style="background-color: aqua; color:azure">
+    <ul class="language">
+        <li>
+            JavaScript
+        </li>
+    </ul>
+</body>
+<script>
+function addLanguage(langName){
+   const li = document.createElement('li');
+   li.innerHTML = `${langName}`
+    document.querySelector('.language').appendChild(li)}
+    addLanguage("python")
+    addLanguage("typescript")
+
+    function addOptlanguage(langName){
+        const li = document.createElement('li');
+        li.appendChild(document.createTextNode(langName))
+         document.querySelector('.language').appendChild(li)
+    }
+addOptlanguage('golang')
+//Editing
+
+const secLAng = document.querySelector("li:nth-child(2)")
+//secLang.innerHTMl = "MOJO"
+const newli = document.createElement('li')
+newli.textContent="mojo"
+secLAng.replaceWith(newli)
+//eedit
+const firstLan = document.querySelector('li:first-child')
+firstLan.outerHTML = '<li>GoScript</li>'
+//edit
+const lastLan = document.querySelector('li:last-child')
+lastLan.remove()
+</script>
+</html>
